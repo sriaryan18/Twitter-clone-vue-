@@ -8,7 +8,7 @@
     </NuxtLink>
     </div>
      <div class="mt-2 space-y-3"  >
-      <SidebarLeftTab v-for="tab in tabs">
+      <SidebarLeftTab v-for="(tab,index) in tabs" :active="activeTab === index" :key="tab.name">
        <template #icon>
         <component :is="tab.icon"/>
        </template>
@@ -24,11 +24,19 @@
 
 <script setup>
 import  {HomeIcon,HashtagIcon,BellIcon,InboxIcon,BookmarkIcon,
-  DocumentTextIcon,UserIcon} from '@heroicons/vue/24/solid'
+  DocumentTextIcon,UserIcon,CircleStackIcon} from '@heroicons/vue/24/solid'
 const {defaultTransition} = useUseTailwindConfig();
-const tabs = [{
-  icon:HomeIcon,name:'Home'
-},{icon:HashtagIcon,name:'Explore'}]
+const activeTab = ref(0);
+const tabs = [
+  {icon:HomeIcon,name:'Home'},
+  {icon:HashtagIcon,name:'Explore'},
+  {icon:InboxIcon,name:'Messages'},
+  {icon:BellIcon,name:'Notification'},
+  {icon:BookmarkIcon,name:'Bookmarks'},
+  {icon:DocumentTextIcon,name:'Lists'},
+  {icon:UserIcon,name:'Profile'},
+  {icon:CircleStackIcon,name:'More'}
+]
 </script>
 
 <style>
